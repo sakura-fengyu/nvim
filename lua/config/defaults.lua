@@ -98,21 +98,34 @@ vim.o.colorcolumn = '100'
 -- 设置自动保存和插件触发的间隔为 100 毫秒
 vim.o.updatetime = 100
 -- 允许在空白区域设置光标（如多行注释末尾）
-vim.o.virtualedit = 'block'
+vim.o.virtualedit = ''
 
+vim.o.winborder = 'bold'
+vim.diagnostic.config({
+	virtual_text = {
+		prefix = '', -- 使用图标作为前缀
+		spacing = 4, -- 前缀与文本之间的间距
+	},
+	signs = true, -- 启用诊断符号
+	underline = true, -- 启用下划线
+	update_in_insert = false, -- 在插入模式下不更新诊断信息
+})
 
-vim.cmd([[
-silent !mkdir -p $HOME/.config/nvim/tmp/backup
-silent !mkdir -p $HOME/.config/nvim/tmp/undo
-"silent !mkdir -p $HOME/.config/nvim/tmp/sessions
-set backupdir=$HOME/.config/nvim/tmp/backup,.
-set directory=$HOME/.config/nvim/tmp/backup,.
-if has('persistent_undo')
-	set undofile
-	set undodir=$HOME/.config/nvim/tmp/undo,.
-endif
-]])
+vim.o.undofile = true
+vim.o.undodir = vim.fn.stdpath('cache') .. '/undo' -- 设置持久化撤销文件目录
 
+-- vim.cmd([[
+-- silent !mkdir -p $HOME/.config/nvim/tmp/backup
+-- silent !mkdir -p $HOME/.config/nvim/tmp/undo
+-- "silent !mkdir -p $HOME/.config/nvim/tmp/sessions
+-- set backupdir=$HOME/.config/nvim/tmp/backup,.
+-- set directory=$HOME/.config/nvim/tmp/backup,.
+-- if has('persistent_undo')
+-- 	set undofile
+-- 	set undodir=$HOME/.config/nvim/tmp/undo,.
+-- endif
+-- ]])
+--
 -- 当打开或新建md文件时 启用拼写检查
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, { pattern = "*.md", command = "setlocal spell", })
 
@@ -120,7 +133,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, { pattern = "*.md", com
 -- %:p:h：Neovim 特殊变量  %：当前文件名   :p：取完整路径（如 /home/user/file.txt）   :h：取路径的目录部分（即 :p:h = /home/user）
 vim.api.nvim_create_autocmd("BufEnter", { pattern = "*", command = "silent! lcd %:p:h", })
 
-vim.cmd([[au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]])
+-- vim.cmd([[au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]])
 
 -- 当通过 :term 命令在 Vim 中打开终端（Terminal Buffer）时，自动进入插入模式（Insert Mode），无需手动按 i 键切换
 vim.cmd([[autocmd TermOpen term://* startinsert]])

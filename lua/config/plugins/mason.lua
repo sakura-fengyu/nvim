@@ -1,16 +1,34 @@
 return {
-	"mason-org/mason.nvim",
-	dependencies = {
-		"williamboman/mason-lspconfig.nvim"
+	{
+		"mason-org/mason.nvim",
+		event = { "BufReadPost", "BufNewFile", "VimEnter" },
+		opts = {
+			ui = {
+				icons = {
+					package_installed = "✓",
+					package_pending = "➜",
+					package_uninstalled = "✗"
+				}
+			}
+		},
 	},
-	event = { "BufReadPost", "BufNewFile", "VimEnter" },
-	opts = {},
-	config = function()
-		require("mason-lspconfig").setup({
+
+	{
+		"mason-org/mason-lspconfig.nvim",
+		dependencies = { "mason-org/mason.nvim" },
+		opts = {
 			ensure_installed = {
 				"lua_ls",
-			},
-			automatic_installation = true,
-		})
-	end
+				-- "pyright",
+				-- "tsserver",
+				-- "html",
+				-- "cssls",
+				-- "jsonls",
+				-- "bashls",
+				-- "dockerls",
+				-- "gopls",
+				-- "rust_analyzer"
+			}
+		}
+	}
 }

@@ -20,11 +20,12 @@ return {
 				},
 			},
 			-- Make the server aware of Neovim runtime files
+			checkThirdParty = false,
 			workspace = {
 				library = {
-					checkThirdParty = false,
 					vim.env.VIMRUNTIME,
 					"~/.config/nvim/",
+					"~/.local/share/nvim/lazy/?/?.lua",
 					-- Depending on the usage, you might want to add additional paths
 					-- here.
 					-- '${3rd}/luv/library'

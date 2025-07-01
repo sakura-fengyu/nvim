@@ -5,7 +5,7 @@ local mode_nv = { "n", "v" }
 local mode_v = { "v" }
 local mode_i = { "i" }
 local nmappings = {
-	{ from = "W", to = ":w<CR>", desc = "保存" },
+	-- { from = "W", to = ":w<CR>", desc = "保存" },
 	{ from = "Q", to = ":q<CR>", desc = "离开" },
 
 	{ from = "<leader>w", to = "<C-w>w", desc = "切换窗口" },

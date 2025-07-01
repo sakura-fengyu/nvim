@@ -18,8 +18,11 @@ require("lazy").setup({
 	-- 查询nvim启动耗时 command :StartupTime
 	{ "dstein64/vim-startuptime" },
 
-	-- 设置dracula主题	
-	require("config.plugins.colorscheme"),
+
+	-- surround ys ds cs
+	require("config.plugins.surround"),
+
+	require("config.plugins.behavior"),
 
 	-- 文件浏览器
 	require("config.plugins.yazi"),
@@ -30,4 +33,18 @@ require("lazy").setup({
 	require("config.plugins.copilot"),
 
 	require("config.plugins.completion"),
+
+	require("config.plugins.telescope"),
+
+	require("config.plugins.editor"),
+
+	require("config.plugins.git"),
+
+	require("config.plugins.indent"),
+
+	require("config.plugins.undo"),
+
+	require("config.plugins.yank"),
+	-- require("config.plugins.treesitter"),
+	require("config.plugins.fun"),
 })
